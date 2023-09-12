@@ -107,7 +107,6 @@
  (tags (org:mirage org:xapi-project))
  (depends
   (ocaml (>= 5.0.0))
-  (websocket (= :version))
   eio
   cohttp-eio
   (eio_main :with-test)))
