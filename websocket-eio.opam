@@ -29,6 +29,7 @@ depends: [
   "cohttp-eio"
   "eio_main" {with-test}
   "odoc" {with-doc}
+  "websocket"
 ]
 build: [
   ["dune" "subst"] {dev}
