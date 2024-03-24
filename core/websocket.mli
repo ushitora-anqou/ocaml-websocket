@@ -16,7 +16,6 @@
  *)
 
 val websocket_uuid : string
-val b64_encoded_sha1sum : string -> string
 val upgrade_present : Cohttp.Header.t -> bool
 
 exception Protocol_error of string
