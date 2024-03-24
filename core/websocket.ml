@@ -291,11 +291,11 @@ module Make (IO : Cohttp.S.IO) = struct
       proto_error "control frame too big"
     else
       (if frame_masked then (
-       Buffer.clear buf;
-       read_exactly ic 4 buf >>= function
-       | None -> proto_error "could not read mask"
-       | Some mask -> return mask)
-      else return String.empty)
+         Buffer.clear buf;
+         read_exactly ic 4 buf >>= function
+         | None -> proto_error "could not read mask"
+         | Some mask -> return mask)
+       else return String.empty)
       >>= fun mask ->
       if payload_len = 0 then
         return @@ Frame.create ~opcode ~extension ~final ()
@@ -364,13 +364,13 @@ module Make (IO : Cohttp.S.IO) = struct
       | Frame.Opcode.Close ->
           (* Immediately echo and pass this last message to the user *)
           (if String.length fr.Frame.content >= 2 then
-           send t
-           @@ Frame.create ~opcode:Frame.Opcode.Close
-                ~content:
-                  String.(
-                    sub ~start:0 ~stop:2 fr.Frame.content |> Sub.to_string)
-                ()
-          else send t @@ Frame.close 1000)
+             send t
+             @@ Frame.create ~opcode:Frame.Opcode.Close
+                  ~content:
+                    String.(
+                      sub ~start:0 ~stop:2 fr.Frame.content |> Sub.to_string)
+                  ()
+           else send t @@ Frame.close 1000)
           >>= fun () -> return fr
       | _ -> return fr
 
