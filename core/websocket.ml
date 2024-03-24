@@ -19,11 +19,6 @@ open Astring
 
 let websocket_uuid = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
 
-module Rng = struct
-  let init ?(state = Random.get_state ()) () len =
-    String.v ~len (fun _ -> Char.of_byte (Random.State.bits state land 0xFF))
-end
-
 module Frame = struct
   module Opcode = struct
     type t =
